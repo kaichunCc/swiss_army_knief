@@ -1,0 +1,36 @@
+lib re:
+re*	匹配0个或多个的表达式。
+re+	匹配1个或多个的表达式。
+re?	匹配0个或1个由前面的正则表达式定义的片段，非贪婪方式
+re{ n}	精确匹配 n 个前面表达式。例如， o{2} 不能匹配 "Bob" 中的 "o"，但是能匹配 "food" 中的两个 o。
+re{ n,}	匹配 n 个前面表达式。例如， o{2,} 不能匹配"Bob"中的"o"，但能匹配 "foooood"中的所有 o。"o{1,}" 等价于 "o+"。"o{0,}" 则等价于 "o*"。
+re{ n, m}	匹配 n 到 m 次由前面的正则表达式定义的片段，贪婪方式
+
+[...]	用来表示一组字符,单独列出：[amk] 匹配 'a'，'m'或'k'
+[^...]	不在[]中的字符：[^abc] 匹配除了a,b,c之外的字符。
+
+. 在默认模式，匹配除了换行的任意字符。如果指定了标签 DOTALL ，它将匹配包括换行符的任意字符。
+
+匹配分组
+
+|  			匹配左右任意一个表达式
+
+(ab) 		将括号中字符作为一个分组
+
+\num 		引用分组num匹配到的字符串
+
+(?P<name>) 	分组起别名
+
+(?P=name) 	引用别名为name分组匹配到的字符串
+
+
+
+def extract_cmd_daemons(cmd_str):
+	
+    dm_mark = re.match(r'\[(?P<daemons>.+)\]', cmd_str)
+    if dm_mark is not None and 'daemons' in dm_mark.groupdict():
+        cmd_str = cmd_str[dm_mark.end():]
+        daemons = dm_mark.groupdict()['daemons'].split(',')
+    else:
+        daemons = None
+    return (daemons, cmd_str)
