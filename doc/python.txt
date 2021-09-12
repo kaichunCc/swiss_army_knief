@@ -34,3 +34,42 @@ def extract_cmd_daemons(cmd_str):
     else:
         daemons = None
     return (daemons, cmd_str)
+
+cat ~
+* 函数调用
+单星号（*）：*agrs
+	将所有参数以元组(tuple)的形式导入：
+
+	实例
+	def foo(param1, *param2):
+		print (param1)
+		print (param2)
+	foo(1,2,3,4,5)
+	以上代码输出结果为：
+
+	1
+	(2, 3, 4, 5)
+	
+	
+单星号的另一个用法是解压参数列表：
+	实例
+	def foo(runoob_1, runoob_2):
+		print(runoob_1, runoob_2)
+	l = [1, 2]
+	foo(*l)
+	以上代码输出结果为：
+
+	1 2
+	
+双星号（**）：**kwargs
+	双星号（**）将参数以字典的形式导入:
+
+	实例
+	def bar(param1, **param2):
+		print (param1)
+		print (param2)
+	bar(1,a=2,b=3)
+	以上代码输出结果为：
+
+	1
+	{'a': 2, 'b': 3}	
